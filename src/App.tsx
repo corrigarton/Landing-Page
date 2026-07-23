@@ -626,11 +626,11 @@ function StabilitySection() {
                   fontSize: 'clamp(1.2rem, 2.2vw, 1.6rem)',
                   fontWeight: 400, color: '#f0ece3', lineHeight: 1.25, marginBottom: '20px',
               }}>
-                When one area stops contributing effectively, 
+                When one area stops contributing effectively, other muscles automatically increase their effort to preserve it.
               </h3>
-              <p style={{ color: 'rgba(240,236,227,0.68)', lineHeight: 1.88, marginBottom: '18px' }}>
+              {/* <p style={{ color: 'rgba(240,236,227,0.68)', lineHeight: 1.88, marginBottom: '18px' }}>
                 other muscles automatically increase their effort to preserve it.
-              </p>
+              </p> */}
               <p style={{ color: 'rgba(240,236,227,0.68)', lineHeight: 1.88, marginBottom: '32px' }}>
                 These compensations allow you to keep moving, but they change how force travels through the body.
               </p>
