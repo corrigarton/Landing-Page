@@ -279,7 +279,7 @@ function Nav() {
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           {!isMobile && <NavLink href="#" muted>Login</NavLink>}
-          {!isMobile && <PrimaryBtn>Begin FitAlign</PrimaryBtn>}
+          {!isMobile && <PrimaryBtn>Enroll</PrimaryBtn>}
           {isMobile && (
             <button
               onClick={() => setMenuOpen(o => !o)}
