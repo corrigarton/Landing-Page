@@ -1234,7 +1234,7 @@ function TestimonialSlider() {
       <div style={{
         opacity: fading ? 0 : 1,
         transition: 'opacity 0.7s ease',
-        height: '180px',
+        height: '200px',
         overflow: 'hidden',
       }}>
         <p style={{
