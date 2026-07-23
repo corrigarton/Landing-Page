@@ -398,7 +398,7 @@ function Hero() {
             fontSize: '1.1rem', lineHeight: 1.78, color: 'rgba(240,236,227,0.6)',
             maxWidth: '500px', margin: '0 auto',
           }}>
-            Practiced by physicians, professional athletes, dancers, studio owners, movement educators & thousands of students worldwide.
+            Practiced by physicians, professional athletes, dancers, studio owners, yoga and Pilates instructors, & thousands of students worldwide.
           </p>
         </div>
 
