@@ -14,4 +14,8 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+<<<<<<< HEAD
 })
+=======
+})
+>>>>>>> 195737e (updated whole thing looks clean)

@@ -90,17 +90,24 @@ function PrimaryBtn({ children, large, href = '#course' }: { children: ReactNode
       href={href}
       style={{
         display: 'inline-block',
-        background: hover ? '#d4b87a' : '#c9a96e',
-        color: '#000',
-        padding: large ? '18px 44px' : '13px 30px',
-        fontSize: large ? '13px' : '11px',
-        fontWeight: 600,
-        letterSpacing: '0.14em',
+        background: hover
+          ? 'linear-gradient(160deg, #d8c07a 0%, #c9a96e 55%, #b8905e 100%)'
+          : 'linear-gradient(160deg, #cdb472 0%, #c2a068 55%, #b08860 100%)',
+        color: '#1a1208',
+        padding: large ? '17px 46px' : '12px 28px',
+        fontSize: large ? '12px' : '11px',
+        fontWeight: 700,
+        letterSpacing: '0.18em',
         textTransform: 'uppercase',
-        transition: 'background 0.2s ease, transform 0.15s ease',
-        transform: hover ? 'scale(1.01)' : 'scale(1)',
+        transition: 'all 0.25s cubic-bezier(0.16,1,0.3,1)',
+        transform: hover ? 'translateY(-2px)' : 'translateY(0)',
         textDecoration: 'none',
         cursor: 'pointer',
+        borderRadius: '8px',
+        border: '1px solid rgba(201,169,110,0.45)',
+        boxShadow: hover
+          ? '0 6px 20px rgba(201,169,110,0.28), 0 2px 4px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.18)'
+          : '0 2px 8px rgba(201,169,110,0.14), 0 1px 2px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.12)',
       }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
@@ -144,7 +151,7 @@ function Section({
 }) {
   return (
     <section style={{
-      padding: '10px 16px',
+      padding: '0 16px',
       background: '#080808',
       ...style,
     }}>
@@ -169,7 +176,7 @@ function BeforeAfterPanel({
   afterAlt: string
 }) {
   const w = useWindowWidth()
-  const isMobile = w < 900
+  const isMobile = w < 768
   const labelStyle: React.CSSProperties = {
     flexShrink: 0,
     textAlign: 'center' as const,
@@ -240,7 +247,7 @@ function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const w = useWindowWidth()
-  const isMobile = w < 900
+  const isMobile = w < 768
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 48)
@@ -255,18 +262,32 @@ function Nav() {
   return (
     <header style={{
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200,
-      background: navBg ? 'rgba(8,8,8,0.97)' : 'transparent',
-      backdropFilter: navBg ? 'blur(20px)' : 'none',
-      WebkitBackdropFilter: navBg ? 'blur(20px)' : 'none',
-      borderBottom: navBg ? '1px solid rgba(201,169,110,0.1)' : '1px solid transparent',
-      transition: 'background 0.45s ease, border-color 0.45s ease',
+      padding: '10px 16px 0',
+      pointerEvents: 'none',
     }}>
       <div style={{
-        maxWidth: '1280px', margin: '0 auto', padding: '0 28px',
-        height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        maxWidth: '1100px', margin: '0 auto',
+        background: 'rgba(10,10,14,0.96)',
+        backdropFilter: 'blur(24px)',
+        WebkitBackdropFilter: 'blur(24px)',
+        borderTop: '1px solid rgba(255,255,255,0.13)',
+        borderLeft: '1px solid rgba(255,255,255,0.13)',
+        borderRight: '1px solid rgba(255,255,255,0.13)',
+        borderBottom: menuOpen ? '1px solid rgba(255,255,255,0.06)' : '1px solid rgba(255,255,255,0.13)',
+        borderTopLeftRadius: '12px',
+        borderTopRightRadius: '12px',
+        borderBottomLeftRadius: menuOpen ? 0 : '12px',
+        borderBottomRightRadius: menuOpen ? 0 : '12px',
+        boxShadow: '0 8px 32px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.07)',
+        pointerEvents: 'auto',
+        transition: 'border-color 0.4s ease',
+      }}>
+      <div style={{
+        padding: '0 20px',
+        height: '52px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
         <a href="#" style={{ textDecoration: 'none' }}>
-          <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.25rem', fontWeight: 400, color: '#f0ece3', letterSpacing: '0.04em' }}>FitAlign</span>
+          <span style={{ fontFamily: "'DM Sans', system-ui, sans-serif", fontSize: '1.25rem', fontWeight: 800, color: '#f0ece3', letterSpacing: '-0.02em' }}>FitAlign</span>
         </a>
 
         {!isMobile && (
@@ -279,7 +300,7 @@ function Nav() {
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           {!isMobile && <NavLink href="#" muted>Login</NavLink>}
-          {!isMobile && <PrimaryBtn>Apply</PrimaryBtn>}
+          {!isMobile && <PrimaryBtn>Join</PrimaryBtn>}
           {isMobile && (
             <button
               onClick={() => setMenuOpen(o => !o)}
@@ -307,16 +328,26 @@ function Nav() {
           )}
         </div>
       </div>
+      </div>
 
       {/* Mobile dropdown */}
       {isMobile && (
         <div style={{
+          maxWidth: '1100px', margin: '0 auto',
           overflow: 'hidden',
           maxHeight: menuOpen ? '360px' : '0',
           transition: 'max-height 0.4s cubic-bezier(0.16,1,0.3,1)',
-          borderTop: menuOpen ? '1px solid rgba(255,255,255,0.06)' : 'none',
+          background: 'rgba(12,12,16,0.88)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          borderTop: '0px solid transparent',
+          borderLeft: menuOpen ? '1px solid rgba(255,255,255,0.08)' : '0px solid transparent',
+          borderRight: menuOpen ? '1px solid rgba(255,255,255,0.08)' : '0px solid transparent',
+          borderBottom: menuOpen ? '1px solid rgba(255,255,255,0.08)' : '0px solid transparent',
+          borderRadius: '0 0 12px 12px',
+          pointerEvents: 'auto',
         }}>
-          <div style={{ padding: '28px 28px 36px', display: 'flex', flexDirection: 'column', gap: '0' }}>
+          <div style={{ padding: '20px 20px 28px', display: 'flex', flexDirection: 'column', gap: '0' }}>
             {['Studio', 'Workshops', 'Teacher Training', 'Login'].map(l => (
               <a
                 key={l}
@@ -341,96 +372,234 @@ function Nav() {
   )
 }
 
+// ─── HERO CTA ─────────────────────────────────────────────────────────────────
+
+function HeroCTA() {
+  const [hover, setHover] = useState(false)
+  return (
+    <a
+      href="#course"
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      style={{
+        display: 'inline-flex', alignItems: 'center', gap: '12px',
+        padding: '16px 40px',
+        border: `1px solid ${hover ? 'rgba(201,169,110,0.7)' : 'rgba(201,169,110,0.3)'}`,
+        borderRadius: '8px',
+        background: hover ? 'rgba(201,169,110,0.08)' : 'transparent',
+        color: hover ? 'rgba(240,236,227,0.95)' : 'rgba(240,236,227,0.78)',
+        fontSize: '11px',
+        fontWeight: 600,
+        letterSpacing: '0.24em',
+        textTransform: 'uppercase',
+        textDecoration: 'none',
+        fontFamily: "'DM Sans', system-ui, sans-serif",
+        transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)',
+        boxShadow: hover ? '0 0 28px rgba(201,169,110,0.1), inset 0 1px 0 rgba(201,169,110,0.1)' : 'none',
+        cursor: 'pointer',
+      }}
+    >
+      Join the First Cohort
+      <svg width="13" height="9" viewBox="0 0 13 9" fill="none" style={{
+        transition: 'transform 0.4s cubic-bezier(0.16,1,0.3,1)',
+        transform: hover ? 'translateX(3px)' : 'translateX(0)',
+      }}>
+        <path d="M1 4.5h11M7.5 1l4 3.5-4 3.5" stroke="rgba(201,169,110,0.9)" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </a>
+  )
+}
+
 // ─── HERO ─────────────────────────────────────────────────────────────────────
 
 function Hero() {
-  const isMobile = useWindowWidth() < 900
+  const isMobile = useWindowWidth() < 768
+  const nytRef = useRef<HTMLDivElement>(null)
+  const [nytInView, setNytInView] = useState(false)
+  const nytRowRef = useRef<HTMLDivElement>(null)
+  const [nytRowInView, setNytRowInView] = useState(false)
+  useEffect(() => {
+    const observe = (el: HTMLDivElement | null, set: (v: boolean) => void) => {
+      if (!el) return
+      const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) set(true) }, { threshold: 0.1 })
+      obs.observe(el)
+      return () => obs.disconnect()
+    }
+    const c1 = observe(nytRef.current, setNytInView)
+    const c2 = observe(nytRowRef.current, setNytRowInView)
+    return () => { c1?.(); c2?.() }
+  }, [])
+
   return (
     <section style={{
-      position: 'relative', minHeight: '100vh',
-      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-      padding: '140px 24px 100px', textAlign: 'center',
-      background: '#080808', overflow: 'hidden',
+      position: 'relative',
+      minHeight: '140svh',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      background: '#06060a',
+      overflow: 'hidden',
+      padding: 0,
     }}>
+
+      {/* Noise texture */}
+      <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 0 }}>
+        <filter id="heroNoise">
+          <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch" />
+          <feColorMatrix type="saturate" values="0" />
+        </filter>
+        <rect width="100%" height="100%" filter="url(#heroNoise)" opacity="0.06" />
+      </svg>
+
+      {/* Gold radial glow */}
       <div style={{
-        position: 'absolute', inset: 0, pointerEvents: 'none',
-        background: 'radial-gradient(ellipse 75% 55% at 50% 58%, rgba(201,169,110,0.055) 0%, transparent 70%)',
+        position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1,
+        background: 'radial-gradient(ellipse 80% 55% at 50% 44%, rgba(180,138,72,0.1) 0%, rgba(120,85,30,0.04) 45%, transparent 70%)',
       }} />
       <div style={{
-        position: 'absolute', top: 0, left: '10%', right: '10%', height: '1px',
-        background: 'linear-gradient(90deg, transparent, rgba(201,169,110,0.3), transparent)',
-        animation: 'lineGrow 1.2s cubic-bezier(0.16,1,0.3,1) 0.1s both',
+        position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1,
+        background: 'radial-gradient(ellipse 110% 80% at 50% 100%, rgba(0,0,0,0.6) 0%, transparent 55%)',
       }} />
 
-      <div style={{ position: 'relative', zIndex: 10, maxWidth: '900px', width: '100%' }}>
-        <div style={{ animation: 'fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.15s both', marginBottom: '64px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px' }}>
-            <div style={{ width: '48px', height: '1px', background: '#c9a96e', opacity: 0.8 }} />
-            <span style={{ fontSize: '11px', letterSpacing: '0.38em', textTransform: 'uppercase', color: '#c9a96e' }}>
+      {/* ════ GROUP A: Identity — pinned to first viewport, centered ════ */}
+      <div style={{
+        position: 'sticky', top: 0,
+        height: '100svh',
+        width: '100%',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+        zIndex: 2,
+        pointerEvents: 'none',
+      }}>
+        <div style={{
+          textAlign: 'center',
+          animation: 'fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.1s both',
+          padding: isMobile ? '0 20px' : '0 32px',
+        }}>
+          {/* Badge */}
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: isMobile ? '18px' : '22px' }}>
+            <div style={{ width: '32px', height: '1px', background: '#c9a96e', opacity: 0.6 }} />
+            <span style={{ fontSize: '10px', letterSpacing: '0.36em', textTransform: 'uppercase', color: 'rgba(201,169,110,0.85)' }}>
               Movement Education
             </span>
-            <div style={{ width: '48px', height: '1px', background: '#c9a96e', opacity: 0.8 }} />
+            <div style={{ width: '32px', height: '1px', background: '#c9a96e', opacity: 0.6 }} />
           </div>
-        </div>
 
-        <div style={{ animation: 'fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.35s both', marginBottom: '44px' }}>
+          {/* Wordmark */}
           <h1 style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(5.5rem, 16vw, 13rem)',
-            fontWeight: 400, lineHeight: 0.88, letterSpacing: '-0.01em', color: '#f0ece3',
+            fontFamily: "'DM Sans', system-ui, sans-serif",
+            fontSize: isMobile ? 'clamp(4.5rem, 18vw, 6rem)' : 'clamp(7rem, 15vw, 12rem)',
+            fontWeight: 800, lineHeight: 0.88, letterSpacing: '-0.03em',
+            color: '#ffffff',
+            margin: 0,
           }}>
             FitAlign
           </h1>
-        </div>
 
-        <div style={{ animation: 'fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.55s both', marginBottom: '40px' }}>
           <p style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(1.35rem, 3.2vw, 2.25rem)',
-            fontStyle: 'italic', fontWeight: 400, color: 'rgba(240,236,227,0.8)',
+            fontFamily: "'DM Sans', system-ui, sans-serif",
+            fontSize: isMobile ? 'clamp(1.15rem, 4.5vw, 1.5rem)' : 'clamp(1.6rem, 2.8vw, 2.4rem)',
+            fontWeight: 500,
+            color: 'rgba(240,236,227,0.72)',
+            margin: isMobile ? '10px 0 0' : '14px 0 0',
+            letterSpacing: '-0.01em',
           }}>
             Restore Your Kid Body.
           </p>
-        </div>
 
-        <div style={{ animation: 'fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.72s both', marginBottom: '56px' }}>
-          <p style={{
-            fontSize: '1.1rem', lineHeight: 1.78, color: 'rgba(240,236,227,0.6)',
-            maxWidth: '500px', margin: '0 auto',
-          }}>
-            Practiced by physicians, professional athletes, dancers, <br /> yoga and Pilates instructors, studio owners <br /> & thousands of students worldwide.
-          </p>
-        </div>
-
-        <div style={{ animation: 'fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.88s both', marginBottom: '72px' }}>
-          <PrimaryBtn large>Begin Learning</PrimaryBtn>
-        </div>
-
-        <div style={{ animation: 'fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 1.05s both' }}>
-          <div style={{
-            display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center',
-            gap: '10px 20px', fontSize: '12px', letterSpacing: '0.2em', textTransform: 'uppercase',
-            color: 'rgba(240,236,227,0.72)',
-          }}>
-            <span>Featured in The New York Times</span>
-            {!isMobile && <span style={{ color: 'rgba(201,169,110,0.8)', fontSize: '16px' }}>·</span>}
-            <span>500+ Teachers</span>
-            {!isMobile && <span style={{ color: 'rgba(201,169,110,0.8)', fontSize: '16px' }}>·</span>}
-            <span>Developed Over 30 Years</span>
+          {/* CTA */}
+          <div style={{ marginTop: isMobile ? '32px' : '40px', pointerEvents: 'auto' }}>
+            <HeroCTA />
           </div>
         </div>
       </div>
 
-      {/* Scroll chevron — sits below the stats, centered */}
+      {/* ════ Second panel — pulled up to straddle the fold ════ */}
       <div style={{
-        position: 'absolute', bottom: '28px', left: '0', right: '0',
-        display: 'flex', justifyContent: 'center', alignItems: 'center',
-        animation: 'fadeUp 1s ease 1.5s both',
-        pointerEvents: 'none',
+        position: 'relative', zIndex: 10,
+        width: '100%',
+        display: 'flex', flexDirection: 'column', alignItems: 'center',
+        marginTop: isMobile ? '-52px' : '-48px',
+        padding: isMobile ? '0 24px 80px' : '0 32px 0',
+        fontFamily: "'DM Sans', system-ui, sans-serif",
+        textAlign: 'center',
       }}>
-        <svg width="36" height="20" viewBox="0 0 36 20" fill="none" style={{ animation: 'scrollPulse 2.8s ease-in-out infinite' }}>
-          <path d="M2 3L18 17L34 3" stroke="rgba(201,169,110,0.55)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+
+        {/* ── Scroll arrow — visible at bottom of first viewport ── */}
+        <svg width="150" height="10" viewBox="0 0 150 10" fill="none"
+          style={{ animation: 'scrollPulse 2.8s ease-in-out infinite', flexShrink: 0 }}>
+          <path d="M1 1L75 9L149 1" stroke="rgba(201,169,110,0.7)" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
+
+        {/* ── NYT row — just below the fold, scroll-revealed ── */}
+        <div ref={nytRowRef} style={{
+          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px',
+          marginTop: '48px',
+          opacity: nytRowInView ? 1 : 0,
+          transform: nytRowInView ? 'translateY(0)' : 'translateY(28px)',
+          filter: nytRowInView ? 'blur(0)' : 'blur(8px)',
+          transition: 'opacity 1.5s cubic-bezier(0.16,1,0.3,1), transform 1.5s cubic-bezier(0.16,1,0.3,1), filter 1.5s cubic-bezier(0.16,1,0.3,1)',
+        }}>
+          <div className="stat-list" style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            flexWrap: 'wrap',
+          }}>
+            {['Featured in The New York Times', '500+ Teachers Trained', 'Developed Over 30 Years'].map((stat, i, arr) => (
+              <span key={stat} style={{ display: 'contents' }}>
+                <span style={{
+                  fontSize: '13px', letterSpacing: '0.18em', textTransform: 'uppercase',
+                  color: 'rgba(240,236,227,0.5)',
+                }}>
+                  {stat}
+                </span>
+                {i < arr.length - 1 && (
+                  <span className="stat-dot" style={{
+                    margin: '0 10px', fontSize: '10px',
+                    color: 'rgba(240,236,227,0.2)', display: 'inline-block',
+                  }}>·</span>
+                )}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Practiced by — scroll-revealed ── */}
+        <div ref={nytRef} style={{
+          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px',
+          marginTop: '112px',
+          opacity: nytInView ? 1 : 0,
+          transform: nytInView ? 'translateY(0)' : 'translateY(32px)',
+          filter: nytInView ? 'blur(0)' : 'blur(10px)',
+          transition: 'opacity 1.8s cubic-bezier(0.16,1,0.3,1) 0.3s, transform 1.8s cubic-bezier(0.16,1,0.3,1) 0.3s, filter 1.8s cubic-bezier(0.16,1,0.3,1) 0.3s',
+        }}>
+          <div style={{
+            fontSize: '10px', letterSpacing: '0.38em', textTransform: 'uppercase',
+            color: 'rgba(201,169,110,0.7)', fontWeight: 600,
+            display: 'flex', alignItems: 'center', gap: '10px',
+          }}>
+            <div style={{ width: '24px', height: '1px', background: 'rgba(201,169,110,0.35)' }} />
+            Practiced by
+            <div style={{ width: '24px', height: '1px', background: 'rgba(201,169,110,0.35)' }} />
+          </div>
+
+          {isMobile ? (
+            <div style={{ color: 'rgba(240,236,227,0.85)', fontWeight: 400, fontSize: '1rem', lineHeight: 1.75, letterSpacing: '-0.01em' }}>
+              Physicians · Professional Athletes · Dancers<br />Yoga &amp; Pilates Instructors · Studio Owners
+            </div>
+          ) : (
+            <div style={{ color: 'rgba(240,236,227,0.85)', fontWeight: 400, fontSize: '1.0625rem', lineHeight: 1.75, letterSpacing: '-0.01em' }}>
+              Physicians · Professional Athletes · Dancers · Yoga &amp; Pilates Instructors · Studio Owners
+            </div>
+          )}
+
+          <div style={{
+            color: 'rgba(240,236,227,0.6)', fontWeight: 300,
+            letterSpacing: '0.01em',
+            fontSize: isMobile ? '0.875rem' : '0.9375rem',
+          }}>
+            Alongside thousands of students worldwide.
+          </div>
+        </div>
+
       </div>
     </section>
   )
@@ -439,7 +608,7 @@ function Hero() {
 // ─── CLIENT B — "When Support Changes" ────────────────────────────────────────
 
 function ClientBSection() {
-  const isMobile = useWindowWidth() < 900
+  const isMobile = useWindowWidth() < 768
 
   if (isMobile) {
     return (
@@ -759,7 +928,7 @@ function WhyFailsSection() {
 // ─── CLIENT A — Kelly ─────────────────────────────────────────────────────────
 
 function ClientASection() {
-  const isMobile = useWindowWidth() < 900
+  const isMobile = useWindowWidth() < 768
 
   if (isMobile) {
     return (
@@ -867,7 +1036,7 @@ function ClientASection() {
 // ─── THE METHOD ───────────────────────────────────────────────────────────────
 
 function MethodSection() {
-  const isMobile = useWindowWidth() < 900
+  const isMobile = useWindowWidth() < 768
   const steps = [
     { n: 1, label: 'Understand', desc: 'What your body is designed to do' },
     { n: 2, label: 'Recognize', desc: 'Where compensation has changed the pattern' },
@@ -1012,7 +1181,7 @@ function TestimonialSection() {
 
 function AboutSection() {
   const w = useWindowWidth()
-  const isMobile = w < 900
+  const isMobile = w < 768
 
   const credentials = [
     'More than 500 teachers trained worldwide',
@@ -1416,12 +1585,19 @@ function CoursePricingSection() {
                 href="#"
                 style={{
                   display: 'block',
-                  background: btnHover ? '#d4b87a' : '#c9a96e',
-                  color: '#000', padding: '20px 32px', textAlign: 'center',
-                  fontSize: '12px', fontWeight: 700, letterSpacing: '0.16em',
+                  background: btnHover
+                    ? 'linear-gradient(160deg, #d8c07a 0%, #c9a96e 55%, #b8905e 100%)'
+                    : 'linear-gradient(160deg, #cdb472 0%, #c2a068 55%, #b08860 100%)',
+                  color: '#1a1208', padding: '18px 32px', textAlign: 'center',
+                  fontSize: '12px', fontWeight: 700, letterSpacing: '0.18em',
                   textTransform: 'uppercase', textDecoration: 'none',
-                  transition: 'background 0.2s ease, transform 0.15s ease',
-                  transform: btnHover ? 'scale(1.01)' : 'scale(1)',
+                  transition: 'all 0.25s cubic-bezier(0.16,1,0.3,1)',
+                  transform: btnHover ? 'translateY(-2px)' : 'translateY(0)',
+                  borderRadius: '8px',
+                  border: '1px solid rgba(201,169,110,0.4)',
+                  boxShadow: btnHover
+                    ? '0 6px 20px rgba(201,169,110,0.28), 0 2px 4px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.18)'
+                    : '0 2px 8px rgba(201,169,110,0.14), 0 1px 2px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.12)',
                 }}
                 onMouseEnter={() => setBtnHover(true)}
                 onMouseLeave={() => setBtnHover(false)}
@@ -1467,7 +1643,7 @@ function FinalCTASection() {
           </p>
         </Reveal>
         <Reveal delay={190}>
-          <PrimaryBtn large>Apply Now</PrimaryBtn>
+          <PrimaryBtn large>Enroll Now</PrimaryBtn>
         </Reveal>
       </Card>
     </Section>
@@ -1499,7 +1675,7 @@ function Footer() {
       <Card style={{ padding: 'clamp(36px, 6vw, 64px)' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '40px', marginBottom: '56px' }}>
           <div>
-            <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.15rem', fontWeight: 400, color: '#f0ece3', letterSpacing: '0.04em', display: 'block', marginBottom: '16px' }}>FitAlign</span>
+            <span style={{ fontFamily: "'DM Sans', system-ui, sans-serif", fontSize: '1.15rem', fontWeight: 800, color: '#f0ece3', letterSpacing: '-0.02em', display: 'block', marginBottom: '16px' }}>FitAlign</span>
             <p style={{ fontSize: '13px', color: 'rgba(240,236,227,0.38)', lineHeight: 1.72 }}>
               Movement education grounded in 30+ years of investigation by Michaelle Edwards.
             </p>
