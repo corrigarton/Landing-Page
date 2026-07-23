@@ -412,11 +412,11 @@ function Hero() {
             gap: '10px 20px', fontSize: '12px', letterSpacing: '0.2em', textTransform: 'uppercase',
             color: 'rgba(240,236,227,0.72)',
           }}>
-            <span>30+ Years of Investigation</span>
+            <span>Featured in The New York Times</span>
+            {!isMobile && <span style={{ color: 'rgba(201,169,110,0.8)', fontSize: '16px' }}>·</span>}
+            <span>Developed Over 30+ Years</span>
             {!isMobile && <span style={{ color: 'rgba(201,169,110,0.8)', fontSize: '16px' }}>·</span>}
             <span>500+ Teachers Trained</span>
-            {!isMobile && <span style={{ color: 'rgba(201,169,110,0.8)', fontSize: '16px' }}>·</span>}
-            <span>Featured in The New York Times</span>
           </div>
         </div>
       </div>
