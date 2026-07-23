@@ -643,7 +643,7 @@ function StabilitySection() {
                   Over time, this can contribute to:
                 </p>
                 {['Poor posture', 'Restricted movement', 'Fatigue and stiffness', 'Uneven joint loading', 'Persistent pain'].map(item => (
-                  <div key={item} style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
+                  <div key={item} style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
                     <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#c9a96e', flexShrink: 0 }} />
                     <span style={{ color: 'rgba(240,236,227,0.7)', fontSize: '15px' }}>{item}</span>
                   </div>
