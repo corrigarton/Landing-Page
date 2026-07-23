@@ -416,7 +416,7 @@ function Hero() {
             {!isMobile && <span style={{ color: 'rgba(201,169,110,0.8)', fontSize: '16px' }}>·</span>}
             <span>Developed Over 30+ Years</span>
             {!isMobile && <span style={{ color: 'rgba(201,169,110,0.8)', fontSize: '16px' }}>·</span>}
-            <span>500+ Teachers Trained</span>
+            <span>500+ Teachers Worldwide</span>
           </div>
         </div>
       </div>
