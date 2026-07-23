@@ -614,7 +614,10 @@ function StabilitySection() {
                 Imagine trying to balance a broom upright on your palm. You wouldn't hold it perfectly still — you would make constant tiny corrections to keep it from falling.
               </p>
               <p style={{ color: 'rgba(240,236,227,0.68)', lineHeight: 1.88 }}>
-                Your body maintains stability in the same way. When one area stops contributing effectively, other muscles automatically increase their effort to preserve it.
+                Your body maintains stability in the same way. 
+              </p>
+              <p style={{ color: 'rgba(240,236,227,0.68)', lineHeight: 1.88 }}>
+                When one area stops contributing effectively, other muscles automatically increase their effort to preserve it.
               </p>
             </Reveal>
           </div>
