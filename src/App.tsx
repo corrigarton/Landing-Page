@@ -279,7 +279,7 @@ function Nav() {
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           {!isMobile && <NavLink href="#" muted>Login</NavLink>}
-          {!isMobile && <PrimaryBtn>Enroll</PrimaryBtn>}
+          {!isMobile && <PrimaryBtn>Apply</PrimaryBtn>}
           {isMobile && (
             <button
               onClick={() => setMenuOpen(o => !o)}
@@ -398,7 +398,7 @@ function Hero() {
             fontSize: '1.1rem', lineHeight: 1.78, color: 'rgba(240,236,227,0.6)',
             maxWidth: '500px', margin: '0 auto',
           }}>
-            Practiced by physicians, professional athletes, dancers, yoga and Pilates instructors, studio owners & thousands of students worldwide.
+            Practiced by physicians, professional athletes, dancers, <br /> yoga and Pilates instructors, studio owners <br /> & thousands of students worldwide.
           </p>
         </div>
 
@@ -1467,7 +1467,7 @@ function FinalCTASection() {
           </p>
         </Reveal>
         <Reveal delay={190}>
-          <PrimaryBtn large>Enroll Now</PrimaryBtn>
+          <PrimaryBtn large>Apply Now</PrimaryBtn>
         </Reveal>
       </Card>
     </Section>
