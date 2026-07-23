@@ -403,7 +403,7 @@ function Hero() {
         </div>
 
         <div style={{ animation: 'fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.88s both', marginBottom: '72px' }}>
-          <PrimaryBtn large>Explore the Course</PrimaryBtn>
+          <PrimaryBtn large>Begin Learning</PrimaryBtn>
         </div>
 
         <div style={{ animation: 'fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 1.05s both' }}>
