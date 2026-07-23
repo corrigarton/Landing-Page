@@ -652,10 +652,7 @@ function StabilitySection() {
             </Reveal>
 
             <Reveal delay={200}>
-              <p style={{
-                fontFamily: 'var(--font-display)',
-                color: 'rgba(240,236,227,0.88)', lineHeight: 1.72, fontSize: '1.0625rem',
-              }}>
+               <p style={{ color: 'rgba(240,236,227,0.68)', lineHeight: 1.88 }}>
                 The symptom may appear in one area, while the pattern involves the entire body.
               </p>
             </Reveal>
