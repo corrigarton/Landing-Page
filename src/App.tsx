@@ -1467,7 +1467,7 @@ function FinalCTASection() {
           </p>
         </Reveal>
         <Reveal delay={190}>
-          <PrimaryBtn large>Begin FitAlign</PrimaryBtn>
+          <PrimaryBtn large>Enroll Now</PrimaryBtn>
         </Reveal>
       </Card>
     </Section>
