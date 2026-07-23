@@ -626,7 +626,7 @@ function StabilitySection() {
                   fontSize: 'clamp(1.2rem, 2.2vw, 1.6rem)',
                   fontWeight: 400, color: '#f0ece3', lineHeight: 1.25, marginBottom: '20px',
               }}>
-                When one area stops contributing effectively, other muscles automatically chip in to preserve stability.
+                When one area stops contributing, other muscles automatically chip in to preserve stability.
               </h3>
               {/* <p style={{ color: 'rgba(240,236,227,0.68)', lineHeight: 1.88, marginBottom: '18px' }}>
                 other muscles automatically increase their effort to preserve it.
