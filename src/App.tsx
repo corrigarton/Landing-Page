@@ -414,9 +414,9 @@ function Hero() {
           }}>
             <span>Featured in The New York Times</span>
             {!isMobile && <span style={{ color: 'rgba(201,169,110,0.8)', fontSize: '16px' }}>·</span>}
-            <span>Developed Over 30 Years</span>
-            {!isMobile && <span style={{ color: 'rgba(201,169,110,0.8)', fontSize: '16px' }}>·</span>}
             <span>500+ Teachers</span>
+            {!isMobile && <span style={{ color: 'rgba(201,169,110,0.8)', fontSize: '16px' }}>·</span>}
+            <span>Developed Over 30 Years</span>
           </div>
         </div>
       </div>
