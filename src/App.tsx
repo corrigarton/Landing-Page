@@ -1231,7 +1231,7 @@ function TestimonialSlider() {
       position: 'relative',
     }}>
       {/* Quote — fixed height so the card never resizes between slides */}
-      <div className="overflow-hidden h-[300px] md:h-[200px]" 
+      <div className="overflow-hidden h-[280px] md:h-[200px]" 
         style={{
           opacity: fading ? 0 : 1,
           transition: 'opacity 0.7s ease',
