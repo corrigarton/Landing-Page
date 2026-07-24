@@ -518,22 +518,31 @@ function Hero() {
         position: 'relative', zIndex: 10,
         width: '100%',
         display: 'flex', flexDirection: 'column', alignItems: 'center',
-        marginTop: isMobile ? '-52px' : '-48px',
+        marginTop: isMobile ? '-120px' : '-90px',
         padding: isMobile ? '0 24px 80px' : '0 32px 0',
         fontFamily: "'DM Sans', system-ui, sans-serif",
         textAlign: 'center',
       }}>
 
-        {/* ── Scroll arrow — visible at bottom of first viewport ── */}
-        <svg width="150" height="10" viewBox="0 0 150 10" fill="none"
-          style={{ animation: 'scrollPulse 2.8s ease-in-out infinite', flexShrink: 0 }}>
-          <path d="M1 1L75 9L149 1" stroke="rgba(201,169,110,0.7)" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-
-        {/* ── NYT row — just below the fold, scroll-revealed ── */}
-        <div ref={nytRowRef} style={{
-          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px',
-          marginTop: '48px',
+        {/* ── NYT row — scroll-revealed, with full-width band ── */}
+        <div style={{
+          position: 'relative',
+          width: '100vw',
+          marginLeft: 'calc(-50vw + 50%)',
+        }}>
+          {/* Band */}
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: 'linear-gradient(180deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.01) 100%)',
+            borderTop: '1px solid rgba(255,255,255,0.08)',
+            borderBottom: '1px solid rgba(255,255,255,0.05)',
+            backdropFilter: 'blur(2px)',
+            WebkitBackdropFilter: 'blur(2px)',
+          }} />
+          <div ref={nytRowRef} style={{
+            position: 'relative',
+            display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px',
+            padding: '18px 24px',
           opacity: nytRowInView ? 1 : 0,
           transform: nytRowInView ? 'translateY(0)' : 'translateY(28px)',
           filter: nytRowInView ? 'blur(0)' : 'blur(8px)',
@@ -559,6 +568,7 @@ function Hero() {
                 )}
               </span>
             ))}
+          </div>
           </div>
         </div>
 
